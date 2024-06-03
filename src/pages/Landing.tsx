@@ -3,11 +3,11 @@ import { useLoaderData } from 'react-router-dom';
 import { TFetchDrinks } from '../types';
 import CocktailList from '../components/CocktailList';
 
-const cocktailsDBUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const COCKTAILS_DB_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 export const loader = async () => {
 	const searchTerm = '';
-	const response = await axios.get(`${cocktailsDBUrl}${searchTerm}`);
+	const response = await axios.get(`${COCKTAILS_DB_URL}${searchTerm}`);
 	return { drinks: response.data.drinks, searchTerm };
 };
 

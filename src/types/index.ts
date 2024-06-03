@@ -18,3 +18,8 @@ export type TFetchDrinks = {
     drinks: TDrink[];
     searchTerm: string;
 }
+
+export type TFetchCocktail = {
+    id: string;
+    cocktail: TDrink;
+}
