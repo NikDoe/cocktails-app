@@ -1,6 +1,6 @@
 import Wrapper from '../assets/wrappers/CocktailList';
 import { TDrink } from '../types';
-import SingleCocktail from './SingleCocktail';
+import CocktailCard from './CocktailCard';
 
 type Props = {
     drinks: TDrink[];
@@ -24,7 +24,7 @@ function CocktailList({ drinks }: Props) {
 
 	return (
 		<Wrapper>
-			{formatedDrinks.map(item => <SingleCocktail key={item.id} {...item} />)}
+			{formatedDrinks.map(item => <CocktailCard key={item.id} {...item} />)}
 		</Wrapper>
 	);
 }
