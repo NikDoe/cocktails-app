@@ -6,6 +6,16 @@ export type TDrink = {
     strGlass: string;
 }
 
+export type TCocktail = {
+    idDrink: string;
+    strAlcoholic: string;
+    strDrink: string;
+    strDrinkThumb: string;
+    strGlass: string;
+    strCategory: string;
+    strInstructions: string
+}
+
 export type TFormatedDrink = {
     id: string,
 	alcoholic: string,
@@ -21,5 +31,5 @@ export type TFetchDrinks = {
 
 export type TFetchCocktail = {
     id: string;
-    cocktail: TDrink;
+    cocktail: TCocktail;
 }
