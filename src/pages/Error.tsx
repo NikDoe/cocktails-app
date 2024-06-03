@@ -4,14 +4,14 @@ import Wrapper from '../assets/wrappers/ErrorPage';
 
 import img from '../assets/not-found.svg';
 
-type ErrorResponse = {
+type GlobalErrorResponse = {
   status: number;
   statusText: string;
   message?: string;
 };
 
 function Error() {
-	const error = useRouteError() as ErrorResponse;
+	const error = useRouteError() as GlobalErrorResponse;
 	console.log(error);
 
 	if(error.status === 404) {

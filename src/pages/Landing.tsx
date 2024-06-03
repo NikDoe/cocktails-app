@@ -11,7 +11,6 @@ export const loader = async () => {
 
 function Landing() {
 	const data = useLoaderData();
-	console.log(data);
 	
 	return (
 		<h1>Landing</h1>
