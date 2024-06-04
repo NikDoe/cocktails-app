@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ActionFunction, Form, redirect } from 'react-router-dom';
+import { ActionFunction, Form, redirect, useNavigation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const API_URL = 'https://www.course-api.com/cocktails-newsletter';
@@ -23,6 +23,9 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 function Newsletter() {
+	const { state } = useNavigation();
+	const isSubmitting = state === 'submitting';
+
 	return (
 		<Form className='form' method='POST'>
 			<h4 style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -72,8 +75,9 @@ function Newsletter() {
 				type='submit'
 				className='btn btn-block'
 				style={{ marginTop: '0.5rem' }}
+				disabled={isSubmitting}
 			>
-				submit
+				{isSubmitting ? 'submitting' : 'submitt'}
 			</button>
 		</Form>
 	);
