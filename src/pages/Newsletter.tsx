@@ -1,11 +1,17 @@
-import { ActionFunction, Form } from 'react-router-dom';
+import axios from 'axios';
+import { ActionFunction, Form, redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+const API_URL = 'https://www.course-api.com/cocktails-newsletter';
 
 export const action: ActionFunction = async ({ request }) => {
 	const formData = await request.formData();
 	const data = Object.fromEntries(formData);
-	console.log(data);
 	
-	return null;
+	const response = await axios.post(API_URL, data);
+	toast.success(response.data.msg);
+	
+	return redirect('/');
 };
 
 function Newsletter() {
