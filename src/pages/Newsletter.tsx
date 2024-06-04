@@ -8,10 +8,18 @@ export const action: ActionFunction = async ({ request }) => {
 	const formData = await request.formData();
 	const data = Object.fromEntries(formData);
 	
-	const response = await axios.post(API_URL, data);
-	toast.success(response.data.msg);
-	
-	return redirect('/');
+	try {
+		const response = await axios.post(API_URL, data);
+		toast.success(response.data.msg);
+		return redirect('/');
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			toast.error(error.response?.data?.msg || 'Произошла ошибка...🤔');
+		} else {
+			toast.error('🔴Произошла неизвестная ошибка🔴');
+		}
+		return error;
+	}
 };
 
 function Newsletter() {

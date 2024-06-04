@@ -2,14 +2,18 @@ import { Outlet, useNavigation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 function Layout() {
-	const { state: navigationState } = useNavigation();
+	const { state } = useNavigation();
+	const isLoading = state === 'loading';
 
 	return (
 		<div>
 			<Navbar />
 			<section className='page'>
-				{navigationState === 'loading' && <div>Загрузка...</div>}
-				{navigationState === 'idle' && <Outlet />}
+				{isLoading ? (
+					<div className='loading' />
+				) : (
+					<Outlet />
+				)}
 			</section>
 		</div>
 	);
