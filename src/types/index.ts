@@ -14,6 +14,7 @@ export type TCocktail = {
     strGlass: string;
     strCategory: string;
     strInstructions: string
+    [key: string]: string | null;
 }
 
 export type TFormatedDrink = {

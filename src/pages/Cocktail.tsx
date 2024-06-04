@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Link, LoaderFunction, useLoaderData } from 'react-router-dom';
+import { Link, LoaderFunction, Navigate, useLoaderData } from 'react-router-dom';
 import { TFetchCocktail } from '../types';
 import Wrapper from '../assets/wrappers/CocktailPage';
 
@@ -13,6 +13,8 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 function Cocktails() {
 	const { cocktail } = useLoaderData() as TFetchCocktail;
+
+	if(!cocktail) return <Navigate to='/' />;
 	
 	const {
 		strDrink: title,
@@ -22,6 +24,12 @@ function Cocktails() {
 		strGlass: glass,
 		strInstructions: instructions,
 	} = cocktail;
+
+	const ingredientPrefix = 'strIngredient';
+	const ingredients = Object.keys(cocktail)
+		.filter(key => key.startsWith(ingredientPrefix) && cocktail[key] !== null)
+		.map(key => cocktail[key])
+		.join(', ');
 
 	return (
 		<Wrapper>
@@ -47,6 +55,10 @@ function Cocktails() {
 					<p>
 						<span className='drink-data'>glass :</span>
 						{glass}
+					</p>
+					<p>
+						<span className='drink-data'>ingredients :</span>
+						{ingredients}
 					</p>
 					<p>
 						<span className='drink-data'>instructions :</span>
