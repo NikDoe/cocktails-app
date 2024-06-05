@@ -1,7 +1,11 @@
 import { Form, useNavigation } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/SearchForm';
 
-function SearchForm() {
+type Props = {
+    searchTerm: string;
+}
+
+function SearchForm({ searchTerm }: Props) {
 	const { state } = useNavigation();
 	const isSubmitting = state === 'submitting';
     
@@ -12,7 +16,7 @@ function SearchForm() {
 					type='search'
 					name='search'
 					className='form-input'
-					defaultValue='vodka'
+					defaultValue={searchTerm}
 				/>
 				<button type='submit' className='btn' disabled={isSubmitting}>
 					{isSubmitting ? 'searching...' : 'search'}
