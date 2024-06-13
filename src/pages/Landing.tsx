@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { LoaderFunction, useLoaderData } from 'react-router-dom';
+import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { TFetchDrinks } from '../types';
 import CocktailList from '../components/CocktailList';
 import SearchForm from '../components/SearchForm';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 
 const COCKTAILS_DB_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
@@ -17,10 +17,13 @@ const searchCocktailsQuery = (searchTerm: string) => {
 	};
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = (queryClient: QueryClient) => async ({ request }: LoaderFunctionArgs) => {
 	const url = new URL(request.url);
 	
 	const searchTerm = url.searchParams.get('search') || '';
+
+	await queryClient.ensureQueryData(searchCocktailsQuery(searchTerm));
+	
 	return { searchTerm };
 };
 
